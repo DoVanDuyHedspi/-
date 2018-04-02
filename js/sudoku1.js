@@ -1,8 +1,3 @@
-
-
-// ... and we solve it!!
-// solve(sudoku);
-// showSudoku(solve(sudoku));
 // given a sudoku cell, returns the row
 var grid = new Array();
 makeNewGame();
@@ -265,9 +260,6 @@ function showNewGame(grid,array){
 		}
 	}
 }
-// function solve(){	
-// 	solve(sudoku);
-// }
 function search(number){
 	for(let i=0;i<9;i++){
 		for(let j=0;j<9;j++){
