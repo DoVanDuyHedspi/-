@@ -185,10 +185,8 @@ function solve(sudoku) {
 	}
 	let newSudoku = new Array();
 	newSudoku = sudoku.slice();
-	console.log(i);
 	return newSudoku;
 
-	// showSudoku(sudoku)
 }
 function sleep(time){
 	return new Promise(function(resolve){
@@ -305,8 +303,11 @@ function makeNewGame(){
 	document.getElementById('alert').innerHTML = '<div class="alert alert-success" role="alert">'+
 				  'Chào mừng bạn đến với trò chơi Sudoku. Hãy bắt đầu bằng việc chọn mức độ chơi và bắt đầu game mới nhé.'+
 				'</div>';
+	document.getElementById('solveStepByStep').parentElement.classList.remove('d-none');
+	document.getElementById('stopStepByStep').parentElement.classList.add('d-none');
 	var sudoku = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);	
 	grid = solve(sudoku);
+	currentCell = 0;
 	var showCell = new Array();
 	let i=0;
 	let x = document.getElementById("level");
@@ -318,7 +319,6 @@ function makeNewGame(){
 	}else {
 		n=35;
 	}
-	console.log(n);
 	while(i<n){
 		let x=Math.floor((Math.random() * 80));
 		if(!showCell.includes(x)){
@@ -327,7 +327,6 @@ function makeNewGame(){
 		}
 	}
 	showNewGame(grid,showCell);
-	console.log(grid);
 }
 function showSudoku(){
 	showAll(grid);
