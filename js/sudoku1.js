@@ -347,3 +347,13 @@ function check() {
 				'</div>';
 	}
 }
+function stopCheck(){
+	for(let i=0;i<=80;i++){		
+		let x=document.getElementById(`cell-${i}`);				
+		if(!x.hasAttribute("disabled")){
+			x.style.background = "white";
+		}
+			
+					
+	}
+}
