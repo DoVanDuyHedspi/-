@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+	<style type="text/css">
+		.play {
+			width: 450px !important;
+		}
+		td {
+			padding: 1px !important;
+			width: 50px !important;
+			font-size: 25px;
+		}
+		td input {
+			text-align: center;
+			height: 49px;
+			width: 49px;
+		}
+		.border-right-gray {
+			border-right: 1px solid gray !important;
+		}
+		.border-bottom-gray {
+			border-bottom: 1px solid gray !important;
+		}
+		.btn-group label {
+			width: 48px !important;
+		}
+	</style>	
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+	  <span class="navbar-brand mb-0 h1">Sudoku</span>
+	</nav>
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-md-2">
+				<select class="custom-select" id="level">
+				  <option value="1">Dễ</option>
+				  <option value="2">Trung bình</option>
+				  <option value="3">Khó</option>
+				</select>
+				<button class="btn btn-outline-primary btn-block my-2" onclick="makeNewGame()">Chơi mới</button>
+				<button class="btn btn-outline-danger btn-block my-2 " onclick="check()">Kiểm tra</button>
+				<button class="btn btn-outline-success btn-block my-2" id="solve" onclick="showSudoku()">Kết quả</button>
+				<div class="input-group my-2">
+				  <input type="text" class="form-control" placeholder="time (ms)"  aria-describedby="basic-addon2" id="time">
+				  <div class="input-group-append">
+				    <button class="btn btn-outline-warning" type="button"><span class="fas fa-play" id="solveStepByStep"></span></button>
+				    <button class="btn btn-outline-warning d-none" type="button"><span class="fas fa-stop" id="stopStepByStep"></span></button>
+				  </div>
+				</div>
+				
+			</div>
+			<div class="col-md-7">
+				<div class="mx-auto play">
+					
+					<table class="table table-bordered ">
+						<tr>
+							<td><input type="text" id="cell-0" class="border-0"></td>
+							<td><input type="text" id="cell-1" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-2" class="border-0"></td>
+							<td><input type="text" id="cell-3" class="border-0"></td>
+							<td><input type="text" id="cell-4" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-5" class="border-0"></td>
+							<td><input type="text" id="cell-6" class="border-0"></td>
+							<td><input type="text" id="cell-7" class="border-0"></td>
+							<td><input type="text" id="cell-8" class="border-0"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="cell-9" class="border-0"></td>
+							<td><input type="text" id="cell-10" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-11" class="border-0"></td>
+							<td><input type="text" id="cell-12" class="border-0"></td>
+							<td><input type="text" id="cell-13" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-14" class="border-0"></td>
+							<td><input type="text" id="cell-15" class="border-0"></td>
+							<td><input type="text" id="cell-16" class="border-0"></td>
+							<td><input type="text" id="cell-17" class="border-0"></td>
+						</tr>
+						<tr>
+							<td class="border-bottom-gray"><input type="text" id="cell-18" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-19" class="border-0"></td>
+							<td class="border-right-gray border-bottom-gray"><input type="text"  id="cell-20"class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-21" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-22" class="border-0"></td>
+							<td class="border-right-gray border-bottom-gray"><input type="text" id="cell-23" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-24" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-25" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-26" class="border-0"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="cell-27" class="border-0"></td>
+							<td><input type="text" id="cell-28" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-29" class="border-0"></td>
+							<td><input type="text" id="cell-30" class="border-0"></td>
+							<td><input type="text" id="cell-31" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-32" class="border-0"></td>
+							<td><input type="text" id="cell-33" class="border-0"></td>
+							<td><input type="text" id="cell-34" class="border-0"></td>
+							<td><input type="text" id="cell-35" class="border-0"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="cell-36" class="border-0"></td>
+							<td><input type="text" id="cell-37" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-38" class="border-0"></td>
+							<td><input type="text" id="cell-39" class="border-0"></td>
+							<td><input type="text" id="cell-40" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-41" class="border-0"></td>
+							<td><input type="text" id="cell-42" class="border-0"></td>
+							<td><input type="text" id="cell-43" class="border-0"></td>
+							<td><input type="text" id="cell-44" class="border-0"></td>
+						</tr>
+						<tr>
+							<td class="border-bottom-gray"><input type="text" id="cell-45" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-46" class="border-0"></td>
+							<td class="border-right-gray border-bottom-gray"><input type="text" id="cell-47" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-48" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-49" class="border-0"></td>
+							<td class="border-right-gray border-bottom-gray"><input type="text" id="cell-50" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-51" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-52" class="border-0"></td>
+							<td class="border-bottom-gray"><input type="text" id="cell-53" class="border-0"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="cell-54" class="border-0"></td>
+							<td><input type="text" id="cell-55" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-56" class="border-0"></td>
+							<td><input type="text" id="cell-57" class="border-0"></td>
+							<td><input type="text" id="cell-58" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-59" class="border-0"></td>
+							<td><input type="text" id="cell-60" class="border-0"></td>
+							<td><input type="text" id="cell-61" class="border-0"></td>
+							<td><input type="text" id="cell-62" class="border-0"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="cell-63" class="border-0"></td>
+							<td><input type="text" id="cell-64" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-65" class="border-0"></td>
+							<td><input type="text" id="cell-66" class="border-0"></td>
+							<td><input type="text" id="cell-67" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-68" class="border-0"></td>
+							<td><input type="text" id="cell-69" class="border-0"></td>
+							<td><input type="text" id="cell-70" class="border-0"></td>
+							<td><input type="text" id="cell-71" class="border-0"></td>
+						</tr>
+						<tr>
+							<td><input type="text" id="cell-72" class="border-0"></td>
+							<td><input type="text" id="cell-73" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-74" class="border-0"></td>
+							<td><input type="text" id="cell-75" class="border-0"></td>
+							<td><input type="text" id="cell-76" class="border-0"></td>
+							<td class="border-right-gray"><input type="text" id="cell-77" class="border-0"></td>
+							<td><input type="text" id="cell-78" class="border-0"></td>
+							<td><input type="text" id="cell-79" class="border-0"></td>
+							<td><input type="text" id="cell-80" class="border-0"></td>
+						</tr>
+
+					</table>
+					<div class="my-3">
+						<div class="btn-group btn-group-toggle" data-toggle="buttons" id="number">
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number1" autocomplete="off"> 1
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number2" autocomplete="off"> 2
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number3" autocomplete="off"> 3
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number4" autocomplete="off"> 4
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number5" autocomplete="off"> 5
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number6" autocomplete="off"> 6
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number7" autocomplete="off"> 7
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number8" autocomplete="off"> 8
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber">
+						    <input type="radio" name="options" id="number9" autocomplete="off"> 9
+						  </label>
+						  <label class="btn btn-outline-secondary" name="checkNumber"()">
+						    <input type="radio" name="options" id="exit" autocomplete="off"> exit
+						  </label>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-3" id="alert">
+				<div class="alert alert-primary" role="alert">
+				  Chào mừng bạn đến với trò chơi Sudoku. Hãy bắt đầu bằng việc chọn mức độ chơi và bắt đầu game mới nhé.
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/sudoku1.js"></script>
+</body>
